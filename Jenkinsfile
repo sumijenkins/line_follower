@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('cleanup') {
-            steps {
-                echo 'Workspace temizleniyor...'
-                deleteDir()
-            }
-        }
     
         stage('SCM') {
             steps {
