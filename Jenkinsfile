@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
-                bat 'mingw32-make -C "%WORKSPACE%"'
+                bat '"C:\Users\simay\CTOOLS\bin\make.exe" -C "%WORKSPACE%"'
             }
         }
 
@@ -21,6 +21,14 @@ pipeline {
                 archiveArtifacts artifacts: '**/Debug/*.elf, **/Debug/*.bin', allowEmptyArchive: true
             }
         
+        }
+    }
+    post {
+        success {
+            echo 'Build başarılı! '
+        }
+        failure {
+            echo 'Build başarısız! ❌'
         }
     }
 }
