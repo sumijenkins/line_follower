@@ -2,23 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('SCM') {
             steps {
-                git branch: 'master', url: 'https://github.com/sumijenkins/line_follower.git', credentialsId: 'github-https'
+                git branch: 'master', url: 'https://github.com/sumijenkins/line_follower.git', credentialsId: 'sumijenkins/******'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building STM32 project...'
-                bat '"C:\\ST\\STM32CubeIDE\\stm32cubeide.exe" -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -data "%WORKSPACE%" -import "%WORKSPACE%" -build LineFollower'
+                echo 'STM32 projesi Makefile ile build ediliyor...'
+                bat 'mingw32-make -C "%WORKSPACE%"'
             }
         }
 
         stage('Archive') {
             steps {
+                echo 'Build artifactları arşivleniyor...'
                 archiveArtifacts artifacts: '**/Debug/*.elf, **/Debug/*.bin', allowEmptyArchive: true
             }
+        }
         }
     }
 }
