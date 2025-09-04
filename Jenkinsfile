@@ -20,7 +20,7 @@ pipeline {
                 echo 'Build artifactları arşivleniyor...'
                 archiveArtifacts artifacts: '**/Debug/*.elf, **/Debug/*.bin', allowEmptyArchive: true
             }
-        }
+        
         }
     }
 }
