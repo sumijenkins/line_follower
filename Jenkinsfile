@@ -5,14 +5,14 @@ pipeline {
     
         stage('SCM') {
             steps {
-                git branch: 'master', url: 'https://github.com/sumijenkins/line_follower.git', credentialsId: 'sumijenkins/******'
+                git branch: 'master', url: 'https://github.com/sumijenkins/line_follower.git', credentialsId: 'githubpat1'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
-                bat '"C:/Users/simay/CTOOLS/bin/make.exe" -C "%WORKSPACE%Debug"'
+                bat '"C:/Users/simay/CTOOLS/bin/make.exe" -C "%WORKSPACE%/Debug"'
             }
         }
 
