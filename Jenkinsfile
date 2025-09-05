@@ -26,7 +26,19 @@ pipeline {
     }
     post {
         success {
-            echo 'Build successful!' 
+            emailext(
+                subject: "[SUCCESS] ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                Build başarılı!
+                - Proje: ${env.JOB_NAME}
+                - Build No: ${env.BUILD_NUMBER}
+                - Son commit: ${env.GIT_COMMIT}
+
+                Artefaktlar Jenkins'te arşivlendi.
+                """,
+                to: "smyysavas@gmail.com",
+                attachLog: true
+            )
         }
         failure {
             echo 'Build failured!'
