@@ -12,9 +12,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
-                bat '"C:/Users/simay/CTOOLS/bin/make.exe" -C "%WORKSPACE%/Debug"'
-                bat "dir ${WORKSPACE} /b"
-                bat "dir ${WORKSPACE}\\Debug /b"
+                bat "\"C:/Users/simay/CTOOLS/bin/make.exe\" -C \"${WORKSPACE}/Debug\" clean all"
+
             }
         }
 
