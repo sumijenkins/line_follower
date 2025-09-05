@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
                 withEnv(["PATH=C:\\Users\\simay\\CTOOLS-ARM\\bin;C:\\Users\\simay\\CTOOLS\\bin;${env.PATH}"]) {
-                    bat 'cd C:\\Users\\simay\\Embedded-C\\My_workspace\\target\\LineFollower && make clean all'
+                    bat 'cd "C:\\Users\\simay\\Embedded-C\\My_workspace\\target\\LineFollower" && make clean all'
                 }
 
             }
