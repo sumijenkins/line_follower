@@ -13,13 +13,15 @@ pipeline {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
                 bat '"C:/Users/simay/CTOOLS/bin/make.exe" -C "%WORKSPACE%/Debug"'
+                bat "dir ${WORKSPACE} /b"
+                bat "dir ${WORKSPACE}\\Debug /b"
             }
         }
 
         stage('Archive') {
             steps {
                 echo 'Build artifactlari arşivleniyor...'
-                archiveArtifacts artifacts: "Debug/*.elf, Debug/*.bin", fingerprint: true
+                archiveArtifacts artifacts: "*.elf, *.bin", fingerprint: true
             }
         
         }
