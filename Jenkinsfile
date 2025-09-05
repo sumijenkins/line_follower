@@ -5,14 +5,23 @@ pipeline {
     
         stage('SCM') {
             steps {
-                git branch: 'master', url: 'https://github.com/sumijenkins/line_follower.git', credentialsId: 'githubpat1'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/sumijenkins/line_follower.git',
+                        credentialsId: 'githubpat1'
+                    ]]
+                ])
             }
         }
 
         stage('Build') {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
-                bat "\"C:/Users/simay/CTOOLS/bin/make.exe\" -C \"${WORKSPACE}/Debug\" clean all"
+                withEnv(["PATH=C:\\Users\\simay\\CTOOLS-ARM\\bin;${env.PATH}"]) {
+                    bat 'make -C "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\line_follower_master" clean all'
+                }
 
             }
         }
@@ -20,7 +29,7 @@ pipeline {
         stage('Archive') {
             steps {
                 echo 'Build artifactlari arşivleniyor...'
-                archiveArtifacts artifacts: "*.elf, *.bin", fingerprint: true
+                archiveArtifacts artifacts: 'LineFollower.*', fingerprint: true
             }
         
         }
