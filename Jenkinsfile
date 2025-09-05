@@ -19,7 +19,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'STM32 projesi Makefile ile build ediliyor...'
-                withEnv(["PATH=C:\\Users\\simay\\CTOOLS-ARM\\bin;${env.PATH}"]) {
+                withEnv(["PATH=C:\\Users\\simay\\CTOOLS-ARM\\bin;C:\\Users\\simay\\CTOOLS\\bin;${env.PATH}"]) {
                     bat 'make -C "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\line_follower_master" clean all'
                 }
 
