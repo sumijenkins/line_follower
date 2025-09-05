@@ -19,7 +19,7 @@ pipeline {
         stage('Archive') {
             steps {
                 echo 'Build artifactlari arşivleniyor...'
-                archiveArtifacts artifacts: 'Debug/*.elf, Debug/*.bin', allowEmptyArchive: true
+                archiveArtifacts artifacts: "build/**/*.elf, build/**/*.bin", fingerprint: true
             }
         
         }
